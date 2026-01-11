@@ -1,0 +1,223 @@
+.pest-uploader-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1rem;
+}
+
+.upload-section {
+    background: linear-gradient(135deg, #f0f7f0 0%, #ffffff 100%);
+    border: 2px dashed #61d46b;
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-section:hover {
+    background: #e6eee6;
+    border-color: #228b2a;
+    transform: scale-[1.02];
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #145c1b;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 2;
+    position: relative;
+}
+
+.upload-icon {
+    font-size: 3.5rem;
+    color: #228b2a;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.upload-section:hover .upload-icon {
+    transform: scale(1.1);
+}
+
+.hidden-input {
+    display: none;
+}
+
+.preview-container {
+    margin-top: 1.5rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 350px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 3px solid #61d46b;
+    object-fit: cover;
+}
+
+.analyze-btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    background: linear-gradient(to right, #228b2a, #145c1b);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(34, 139, 42, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.analyze-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 139, 42, 0.5);
+}
+
+.analyze-btn:disabled {
+    background: #cbd5cc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.result-card {
+    margin-top: 2rem;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    border-top: 6px solid #61d46b;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pest-title {
+    font-size: 1.8rem;
+    color: #145c1b;
+    margin: 0;
+    font-weight: 700;
+}
+
+.risk-badge {
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.risk-high {
+    background: linear-gradient(135deg, #ff5252, #d32f2f);
+}
+
+.risk-medium {
+    background: linear-gradient(135deg, #ffa726, #f57c00);
+}
+
+.risk-low {
+    background: linear-gradient(135deg, #66bb6a, #388e3c);
+}
+
+.treatment-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.treatment-section h4 {
+    color: #091a09;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.treatment-text {
+    white-space: pre-wrap;
+    line-height: 1.8;
+    color: #333;
+    font-size: 1.05rem;
+    background-color: #f9fdf9;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #61d46b;
+}
+
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .pest-uploader-container {
+        padding: 0.5rem;
+    }
+
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pest-title {
+        font-size: 1.5rem;
+    }
+}

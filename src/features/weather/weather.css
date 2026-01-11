@@ -1,0 +1,167 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Vertical gradient from top to bottom */
+    background: linear-gradient(to bottom, #267e49, #74b870);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.weather-container {
+    background-color: #d6e6d9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 800px;
+    /* Increased width for grid */
+    max-width: 95%;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+
+/* Align language selector and upazila selector in separate lines */
+.selector-container {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal layout for desktop */
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    min-width: 200px;
+}
+
+/* Ensure that labels are aligned properly with the dropdowns */
+.selector-container label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Dropdowns take full width of their container */
+.selector-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Style for the button */
+button#btnGetWeather {
+    margin-top: 5px;
+    /* Alignment fix */
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+    /* Align with inputs */
+    height: 38px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Advisory Card */
+.advisory-card {
+    background: #fff;
+    border-left: 5px solid #ff9800;
+    /* Warning color default */
+    padding: 15px;
+    text-align: left;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.advisory-card h2 {
+    margin-top: 0;
+    color: #e65100;
+}
+
+.advisory-card p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* GRID */
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.forecast-card {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.forecast-card h3 {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.forecast-card .date {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.forecast-card img {
+    width: 50px;
+    height: 50px;
+}
+
+.forecast-card .temp {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2E7D32;
+    margin: 5px 0;
+}
+
+.forecast-card .details {
+    font-size: 0.85rem;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+#go-home {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 25px;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#go-home:hover {
+    background: rgba(255, 255, 255, 0.4);
+}

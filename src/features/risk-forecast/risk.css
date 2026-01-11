@@ -1,0 +1,300 @@
+/* HarvestGuard Risk Forecast – polished dual-language page */
+
+/* ===== Global Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Base Typography & Background ===== */
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #c3e0c7 0%, #a9f7a9 45%, #87dd94 100%);
+  color: #12371b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+/* ===== Header (matches main site vibe) ===== */
+.header {
+  background: linear-gradient(135deg, #0e6118, #15a037);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.brand-main {
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+/* language toggle */
+.lang-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.lang-toggle button {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 5px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.lang-toggle button:hover {
+  background-color: #e6eee6;
+  color: #126319;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+}
+
+.lang-toggle button.active {
+  background-color: #ffffff;
+  color: #228b2a;
+  transform: translateY(-1px);
+}
+
+/* hero strip under header */
+.hero-strip {
+  padding: 14px 18px 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.hero-strip h1 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hero-strip .subtitle {
+  font-size: 0.93rem;
+  max-width: 780px;
+}
+
+/* ===== Main layout ===== */
+.a4-container {
+  padding: 22px 16px 34px;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+/* Card styling – soft, rounded, similar to main site cards */
+.card {
+  background-color: rgba(248, 255, 248, 0.9);
+  border-radius: 18px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid #cfe5d1;
+  backdrop-filter: blur(4px);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #104918;
+}
+
+/* ===== Form elements ===== */
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+}
+
+.form-group select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #b8d9ba;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-group select:focus {
+  border-color: #2a9f37;
+  box-shadow: 0 0 0 2px rgba(33, 150, 83, 0.25);
+}
+
+/* CTA button – similar to main .cta-button */
+#calculateBtn {
+  margin-top: 10px;
+  padding: 0.7rem 1.6rem;
+  width: 100%;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #228b2a;
+  border: 4px solid #091a09;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(12, 82, 18, 0.24);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+#calculateBtn:hover {
+  background-color: #83df88;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(12, 82, 18, 0.3);
+}
+
+.helper-text {
+  font-size: 0.78rem;
+  margin-top: 10px;
+  color: #3e6643;
+}
+
+/* ===== Forecast table ===== */
+.table-wrapper {
+  margin-top: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #cfe5d1;
+  background-color: #f6fff6;
+}
+
+.forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.forecast-table th,
+.forecast-table td {
+  border-bottom: 1px solid #d6ead8;
+  padding: 7px 4px;
+  text-align: center;
+}
+
+.forecast-table thead th {
+  background: #d1ebd3;
+  font-weight: 600;
+}
+
+.forecast-table tbody tr:nth-child(odd) {
+  background-color: #f8fff8;
+}
+
+.forecast-table tbody tr:nth-child(even) {
+  background-color: #eef8ef;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  color: #4c7053;
+  margin-top: 4px;
+}
+
+/* ===== Result card ===== */
+.highlight {
+  border-left: 5px solid #f5a623;
+}
+
+.card-result {
+  background: #ffffff;
+}
+
+.risk-headline {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.risk-detail {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-bottom: 6px;
+}
+
+/* ===== Footer ===== */
+.footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 14px 16px 18px;
+  font-size: 0.82rem;
+  color: #3f5f45;
+  background-color: #e0ece0;
+  border-top: 1px solid #c6ddc7;
+}
+
+/* ===== Responsive layout – 2-column grid on larger screens ===== */
+@media (min-width: 880px) {
+  .a4-container {
+    grid-template-columns: 1.1fr 1.1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "form forecast"
+      "result forecast";
+  }
+
+  .card-form {
+    grid-area: form;
+  }
+
+  .card-forecast {
+    grid-area: forecast;
+  }
+
+  .card-result {
+    grid-area: result;
+  }
+}
+#go-home {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #166e2e;
+    color: white;
+    padding: 8px 22px;
+    border: none;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 5000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#go-home:hover {
+    background: #0f5e25;
+}
+
+
