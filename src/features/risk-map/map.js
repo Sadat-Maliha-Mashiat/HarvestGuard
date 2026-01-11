@@ -236,12 +236,25 @@ function initUI() {
 
 // ---------- Map ----------
 function initMap(center) {
-  if (map) map.remove();
+  if (!center || isNaN(center[0]) || isNaN(center[1])) {
+    center = DISTRICT_CENTERS[DEFAULT_DISTRICT];
+  }
+
+  if (map) {
+    try { map.remove(); } catch (e) { console.error("Map remove error:", e); }
+  }
+
   map = L.map('map').setView(center, 10);
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '© OSM'
   }).addTo(map);
+
+  // Force resize check to fix "gray/white map" issue
+  setTimeout(() => {
+    if (map) map.invalidateSize();
+  }, 400);
 }
 
 // default farmer icon restoring!
