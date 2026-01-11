@@ -9,52 +9,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // === THREE.JS 3D MODEL ===
   const container = document.getElementById('threeD-container');
-  if (!container) return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    50,
-    container.clientWidth / container.clientHeight,
-    0.1,
-    1000
-  );
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setClearColor(0x000000, 0);
-  container.appendChild(renderer.domElement);
-
-  const light = new THREE.DirectionalLight(0xffffff, 2);
-  light.position.set(2, 2, 5);
-  scene.add(light);
-  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-
-  const loader = new THREE.GLTFLoader();
-  loader.load(
-    'assets/models/low_poly_farm_v2/low_poly_farm_v2.glb',
-    (gltf) => {
-      const model = gltf.scene;
-      model.scale.set(1, 1, 1);
-      model.position.y = -1;
-      scene.add(model);
-
-      camera.position.set(0, 2, 15);
-
-      function animate() {
-        requestAnimationFrame(animate);
-        model.rotation.y += 0.005;
-        renderer.render(scene, camera);
-      }
-      animate();
-    },
-    undefined,
-    (error) => console.error('3D Model load error:', error)
-  );
-
-  window.addEventListener('resize', () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
+  if (container) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      50,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-  });
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const light = new THREE.DirectionalLight(0xffffff, 2);
+    light.position.set(2, 2, 5);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+      'assets/models/low_poly_farm_v2/low_poly_farm_v2.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        model.scale.set(1, 1, 1);
+        model.position.y = -1;
+        scene.add(model);
+
+        camera.position.set(0, 2, 15);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          model.rotation.y += 0.005;
+          renderer.render(scene, camera);
+        }
+        animate();
+      },
+      undefined,
+      (error) => console.error('3D Model load error:', error)
+    );
+
+    window.addEventListener('resize', () => {
+      if (container.clientWidth && container.clientHeight) {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
+    });
+  }
 
   // -----------------------------------
   // Feature Card Hover Effects (optional)
@@ -72,16 +74,19 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // === Scroll to Features Section on "Get Started" Click ===
-  document.getElementById("cta-button").addEventListener("click", () => {
-    const target = document.getElementById("features-section");
-
-    const topPos = target.getBoundingClientRect().top + window.pageYOffset - 60;
-
-    window.scrollTo({
-      top: topPos,
-      behavior: "smooth"
+  const ctaBtn = document.getElementById("cta-button");
+  if (ctaBtn) {
+    ctaBtn.addEventListener("click", () => {
+      const target = document.getElementById("features-section");
+      if (target) {
+        const topPos = target.getBoundingClientRect().top + window.pageYOffset - 60;
+        window.scrollTo({
+          top: topPos,
+          behavior: "smooth"
+        });
+      }
     });
-  });
+  }
 
   // No auth protection needed as per user request
   // All feature buttons remain functional as normal links defined in HTML
