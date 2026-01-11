@@ -451,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (homeBtn) {
     homeBtn.addEventListener("click", () => {
-      window.location.href = "../../../public/index.html";
+      window.location.href = "/";
     });
   }
 });

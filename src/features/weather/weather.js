@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById("go-home");
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
-            window.location.href = "../../../public/index.html";
+            window.location.href = "/";
         });
     }
 
