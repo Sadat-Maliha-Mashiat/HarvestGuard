@@ -2,7 +2,7 @@
 
 
 // ---------- Config ----------
-const OPENWEATHER_API_KEY = "83d0172bfdd2a9497f8dfefeeda4a6a6";
+const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || "83d0172bfdd2a9497f8dfefeeda4a6a6";
 const DEFAULT_DISTRICT = "Chittagong";
 
 // district centers

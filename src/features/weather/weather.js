@@ -32,7 +32,7 @@ const i18n = {
     }
 };
 
-const apiKey = "83d0172bfdd2a9497f8dfefeeda4a6a6";
+const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY || "83d0172bfdd2a9497f8dfefeeda4a6a6";
 let currentLanguage = "bn"; // Default to Bangla as per requirement
 
 // Initialize
