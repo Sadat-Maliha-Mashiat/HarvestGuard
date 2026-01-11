@@ -1,0 +1,176 @@
+import { identifyPest } from "../../services/geminiService";
+
+// --- State Variables ---
+let currentFile = null;
+let currentLanguage = "en";
+
+// --- DOM Elements ---
+const components = {
+    uploadSection: null,
+    fileInput: null,
+    previewContainer: null,
+    previewImage: null,
+    analyzeBtn: null,
+    btnText: null,
+    loader: null,
+    errorContainer: null,
+    resultCard: null,
+    pestTitle: null,
+    riskBadge: null,
+    treatmentText: null
+};
+
+// --- Initialization ---
+document.addEventListener("DOMContentLoaded", () => {
+    // Inject HTML structure dynamically if not present, OR bind to existing structure
+    // For this transition, we will assume we replace the #root or 'container' content with our functional HTML
+
+    // Bind global language selector if it exists
+    const langSelect = document.getElementById("language");
+    if (langSelect) {
+        langSelect.addEventListener("change", (e) => {
+            currentLanguage = e.target.value;
+            updateLanguage();
+        });
+    }
+
+    initPestUploader();
+});
+
+function initPestUploader() {
+    const root = document.getElementById("root");
+    if (!root) return;
+
+    // Render inner HTML structure similar to the React component
+    root.innerHTML = `
+      <div class="pest-uploader-container">
+        <h2 id="uploader-title">পোকা বা ফসলের ক্ষতি চিহ্নিত করুন</h2>
+
+        <div class="upload-section" id="upload-section">
+          <input id="pest-file-input" type="file" accept="image/jpeg, image/png" capture="environment" class="hidden-input" />
+          <div class="upload-label">
+            <span class="upload-icon">📷</span>
+            <span id="upload-text">ছবি তুলুন বা আপলোড করুন</span>
+            <span style="font-size: 0.9rem; color: #666; font-weight: 400;">(JPEG বা PNG ফরম্যাট)</span>
+          </div>
+        </div>
+
+        <div id="preview-container" class="preview-container" style="display: none;">
+          <img id="preview-image" src="" alt="Preview" class="preview-image" />
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <button id="analyze-btn" class="analyze-btn" disabled>
+            <span id="loader" class="loader" style="display: none;"></span> 
+            <span id="btn-text">🔍 সমাধান দেখুন</span>
+          </button>
+        </div>
+
+        <div id="error-container" style="display: none; color: #d32f2f; margin-top: 1.5rem; font-weight: 600; padding: 10px; background: #ffebee; border-radius: 8px;"></div>
+
+        <div id="result-card" class="result-card" style="display: none;">
+          <div class="result-header">
+            <h3 id="pest-title" class="pest-title"></h3>
+            <span id="risk-badge" class="risk-badge"></span>
+          </div>
+
+          <div class="treatment-section">
+            <h4>✅ পরামর্শ ও প্রতিকার:</h4>
+            <div id="treatment-text" class="treatment-text"></div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Bind elements
+    components.uploadSection = document.getElementById("upload-section");
+    components.fileInput = document.getElementById("pest-file-input");
+    components.previewContainer = document.getElementById("preview-container");
+    components.previewImage = document.getElementById("preview-image");
+    components.analyzeBtn = document.getElementById("analyze-btn");
+    components.btnText = document.getElementById("btn-text");
+    components.loader = document.getElementById("loader");
+    components.errorContainer = document.getElementById("error-container");
+    components.resultCard = document.getElementById("result-card");
+    components.pestTitle = document.getElementById("pest-title");
+    components.riskBadge = document.getElementById("risk-badge");
+    components.treatmentText = document.getElementById("treatment-text");
+
+    // Event Listeners
+    components.uploadSection.addEventListener("click", () => components.fileInput.click());
+    components.fileInput.addEventListener("change", handleFileSelect);
+    components.analyzeBtn.addEventListener("click", handleSubmit);
+}
+
+// --- Handlers ---
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        currentFile = file;
+        components.errorContainer.style.display = "none";
+        components.resultCard.style.display = "none";
+        components.analyzeBtn.disabled = false;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            components.previewImage.src = e.target.result;
+            components.previewContainer.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+async function handleSubmit() {
+    if (!currentFile) return;
+
+    // Loading State
+    setLoading(true);
+    components.errorContainer.style.display = "none";
+    components.resultCard.style.display = "none";
+
+    try {
+        const data = await identifyPest(currentFile);
+        displayResult(data);
+    } catch (err) {
+        console.error(err);
+        components.errorContainer.textContent = err.message && err.message.includes("API Key")
+            ? "API Key কনফিগার করা নেই! দয়া করে .env ফাইলে VITE_GEMINI_API_KEY যুক্ত করুন।"
+            : "দুঃখিত, বিশ্লেষণে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।";
+        components.errorContainer.style.display = "block";
+    } finally {
+        setLoading(false);
+    }
+}
+
+function setLoading(isLoading) {
+    components.analyzeBtn.disabled = isLoading;
+    if (isLoading) {
+        components.loader.style.display = "inline-block";
+        components.btnText.textContent = " বিশ্লেষণ চলছে...";
+    } else {
+        components.loader.style.display = "none";
+        components.btnText.textContent = "🔍 সমাধান দেখুন";
+    }
+}
+
+function displayResult(data) {
+    components.pestTitle.textContent = data.pest_name_bn;
+    components.riskBadge.textContent = "Risk: " + data.risk_level;
+    components.riskBadge.className = "risk-badge " + getRiskClass(data.risk_level);
+    components.treatmentText.textContent = data.treatment_plan_bn;
+
+    components.resultCard.style.display = "block";
+}
+
+function getRiskClass(level) {
+    if (!level) return "";
+    const l = level.toLowerCase();
+    if (l.includes("high")) return "risk-high";
+    if (l.includes("medium")) return "risk-medium";
+    return "risk-low";
+}
+
+// Optional: Language updates (if needed later)
+function updateLanguage() {
+    // Implement text switching if needed
+}
