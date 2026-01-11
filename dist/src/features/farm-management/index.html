@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarvestGuard — Farmer Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="/assets/farmManagement-C0IAI_1A.css">
+</head>
+
+<body>
+
+    <!-- Header / Nav -->
+    <header class="main-nav">
+        <div class="nav-content">
+            <a href="../../../public/index.html" class="back-link">🏡</a>
+            <div id="status-indicator" class="status-pill">● Connecting...</div>
+            <button onclick="toggleLang()" class="lang-btn">EN / বাংলা</button>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+
+        <!-- DASHBOARD (Direct Access) -->
+        <section id="screen-dashboard" class="view-screen active">
+            <div class="dashboard-layout">
+                <!-- Profile Sidebar -->
+                <aside class="sidebar glass">
+                    <div class="profile-card">
+                        <div class="avatar">👤</div>
+                        <h3 id="display-name">Guest Farmer</h3>
+                        <p id="display-phone" class="muted">Management Portal</p>
+                        <p id="display-loc" class="muted">Dhaka, Bangladesh</p>
+                    </div>
+
+                    <hr>
+
+                    <form id="add-batch-form" onsubmit="saveBatch(event)">
+                        <h4 data-t="add_batch">Record New Harvest</h4>
+                        <div class="input-group small">
+                            <label data-t="crop">Crop</label>
+                            <select id="b-crop" required>
+                                <option value="Rice">Rice / ধান</option>
+                                <option value="Wheat">Wheat / গম</option>
+                                <option value="Jute">Jute / পাট</option>
+                                <option value="Potato">Potato / আলু</option>
+                            </select>
+                        </div>
+                        <div class="input-group small">
+                            <label data-t="weight">Weight (kg)</label>
+                            <input type="number" id="b-weight" required>
+                        </div>
+                        <div class="input-group small">
+                            <label data-t="storage">Storage</label>
+                            <select id="b-storage" required>
+                                <option value="Jute Bag Stack">Jute Bag Stack</option>
+                                <option value="Silo">Silo</option>
+                                <option value="Open Area">Open Area</option>
+                                <option value="Tin Shed">Tin Shed</option>
+                            </select>
+                        </div>
+                        <div class="input-group small">
+                            <label data-t="date">Date</label>
+                            <input type="date" id="b-date" required>
+                        </div>
+                        <button type="submit" class="prime-btn sm" data-t="btn_save">Save Record</button>
+                    </form>
+                </aside>
+
+                <!-- Batch Main Content -->
+                <div class="main-panel glass">
+                    <h2 data-t="batch_title">My Harvest Lots</h2>
+                    <div id="batch-list" class="batch-grid">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- App Logic -->
+    <script src="farm.js"></script>
+</body>
+
+</html>

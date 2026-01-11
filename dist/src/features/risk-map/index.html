@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HarvestGuard — Local Risk Map</title>
+
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" crossorigin href="/assets/riskMap-DRKRHsQk.css">
+</head>
+
+<body>
+
+  <header id="site-header">
+    <div style="display:flex; align-items:center;">
+      <a href="../../../public/index.html" class="home-icon"
+        style="text-decoration:none; margin-right: 15px; font-size: 1.5rem; color: white;">🏡</a>
+      <h1 id="appTitle" style="margin:0; font-size: 1.2rem;">HarvestGuard — Local Risk Map</h1>
+    </div>
+    <div class="top-controls-row">
+      <select id="langToggle">
+        <option value="en">English</option>
+        <option value="bn">বাংলা</option>
+      </select>
+      <button id="refreshBtn">Refresh</button>
+      <button id="exportBtn">Export JSON</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Left Panel: Profile & Batches -->
+    <div class="left-panel">
+      <div id="noProfile">No profile loaded — login/register in A2.</div>
+
+      <div id="profileDetails" style="display:none;">
+        <h3 id="panelTitle">Profile / Farmer</h3>
+        <div id="pName" style="font-weight:bold; font-size:1.1rem;"></div>
+        <div id="pPhone" class="muted"></div>
+        <div id="pEmail" class="muted"></div>
+        <div id="pDistrict" class="muted"></div>
+        <button id="clearLocal" class="gray-btn">Clear Local</button>
+      </div>
+
+      <hr style="margin: 20px 0; border:0; border-top:1px solid #eee;">
+
+      <h3 id="batchTitle">Batch list</h3>
+      <div id="batchList"></div>
+
+      <button id="openDummy" class="green-btn" style="width:100%; margin-top:20px;">Load Demo Farmer</button>
+    </div>
+
+    <!-- Right Panel: Map & Filters -->
+    <div class="right-panel">
+      <div id="statusBar" style="font-size: 0.8rem; color: #1f712f; margin-bottom: 5px;">ready</div>
+
+      <div class="top-controls-row" style="margin-bottom: 10px;">
+        <label id="districtLabel" for="districtSelect">District:</label>
+        <select id="districtSelect">
+          <option value="Dhaka">Dhaka</option>
+          <option value="Chittagong">Chittagong</option>
+        </select>
+
+        <div style="margin-left:auto;">
+          <button id="fAll" class="filterBtn" data-risk="All">All</button>
+          <button id="fLow" class="filterBtn" data-risk="Low">Low</button>
+          <button id="fMed" class="filterBtn" data-risk="Medium">Medium</button>
+          <button id="fHigh" class="filterBtn" data-risk="High">High</button>
+        </div>
+      </div>
+
+      <div id="map"></div>
+
+      <div class="legend"
+        style="margin-top:15px; background:white; padding:10px; border-radius:8px; display:flex; gap:15px; font-size:0.9rem; align-items:center;">
+        <b id="legendTitle">Risk</b>:
+        <span><span class="dot low"></span><span class="legend-low">Low</span></span>
+        <span><span class="dot med"></span><span class="legend-medium">Medium</span></span>
+        <span><span class="dot high"></span><span class="legend-high">High</span></span>
+        <span><span class="dot farmer"></span><span class="legend-farmer">Farmer</span></span>
+      </div>
+
+      <div id="footerText" class="footer-text">Tap markers for details • Offline via LocalStorage</div>
+    </div>
+  </div>
+
+  <script src="map.js"></script>
+</body>
+
+</html>

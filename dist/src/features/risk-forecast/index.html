@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">HarvestGuard – ঝুঁকি পূর্বাভাস | Risk Forecast</title>
+  <link rel="stylesheet" crossorigin href="/assets/riskForecast-ClkSU8s8.css">
+</head>
+
+<body>
+  <div class="top-nav">
+    <button id="go-home">Go Back to Home 🏡</button>
+    <div class="lang-switch">
+      <button id="lang-en" class="active">English</button>
+      <button id="lang-bn">বাংলা</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>HarvestGuard</h1>
+        <span id="brand-sub">Risk Forecast</span>
+      </div>
+      <p id="subtitle">Use a mock 7-day forecast and your stored paddy information to estimate Estimated Time to
+        Critical Loss (ETCL) and spoilage risk.</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <h2 id="batch-title">Batch information</h2>
+        <div class="card">
+          <div class="form-group">
+            <label id="label-division" for="division">Storage location (division / district)</label>
+            <select id="division">
+              <option value="Dhaka" data-en="Dhaka / ঢাকা" data-bn="ঢাকা / Dhaka">Dhaka</option>
+              <option value="Chattogram" data-en="Chattogram / চট্টগ্রাম" data-bn="চট্টগ্রাম / Chattogram">Chattogram
+              </option>
+              <option value="Rajshahi" data-en="Rajshahi / রাজশাহী" data-bn="রাজশাহী / Rajshahi">Rajshahi</option>
+              <option value="Khulna" data-en="Khulna / খুলনা" data-bn="খুলনা / Khulna">Khulna</option>
+              <option value="Barishal" data-en="Barishal / বরিশাল" data-bn="বরিশাল / Barishal">Barishal</option>
+              <option value="Sylhet" data-en="Sylhet / সিলেট" data-bn="সিলেট / Sylhet">Sylhet</option>
+              <option value="Rangpur" data-en="Rangpur / রংপুর" data-bn="রংপুর / Rangpur">Rangpur</option>
+              <option value="Mymensingh" data-en="Mymensingh / ময়মনসিংহ" data-bn="ময়মনসিংহ / Mymensingh">Mymensingh
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label id="label-cropType" for="cropType">Crop type</label>
+            <select id="cropType">
+              <option value="paddy" data-en="Paddy / ধান" data-bn="ধান / Paddy">Paddy</option>
+              <option value="rice" data-en="Rice / চাল" data-bn="চাল / Rice">Rice</option>
+              <option value="wheat" data-en="Wheat / গম" data-bn="গম / Wheat">Wheat</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label id="label-storageType" for="storageType">Storage type</label>
+            <select id="storageType">
+              <option value="tin" data-en="Tin Shed / টিন শেড" data-bn="টিন শেড / Tin Shed">Tin Shed</option>
+              <option value="open" data-en="Open Veranda / খোলা বারান্দা" data-bn="খোলা বারান্দা / Open Veranda">Open
+                Veranda</option>
+              <option value="silo" data-en="Silo (Hermetic Bags) / সাইলো বা বায়ুরোধী ব্যাগ"
+                data-bn="সাইলো বা বায়ুরোধী ব্যাগ / Silo">Silo (Hermetic Bags)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label id="label-moisture" for="moistureLevel">Grain condition (moisture)</label>
+            <select id="moistureLevel">
+              <option value="dry" data-en="Dry (< 14%) / শুকনো" data-bn="শুকনো / Dry">Dry (< 14%)</option>
+              <option value="medium" data-en="Medium (14-17%) / মাঝারি" data-bn="মাঝারি / Medium">Medium (14-17%)
+              </option>
+              <option value="wet" data-en="Wet (> 17%) / ভেজা" data-bn="ভেজা / Wet">Wet (> 17%)</option>
+            </select>
+          </div>
+
+          <p id="helper-text" class="helper">Tip: choose an exposed storage (open veranda) + wet grain to see how
+            quickly ETCL drops.</p>
+          <button id="calculateBtn" class="primary-btn">Calculate risk</button>
+        </div>
+      </section>
+
+      <div id="resultCard" class="result-card" style="display: none;">
+        <h2 id="result-title">Risk summary</h2>
+        <div class="risk-info">
+          <h3 id="riskHeadline"></h3>
+          <p id="riskDetail"></p>
+          <p id="etclNote" class="note"></p>
+        </div>
+      </div>
+
+      <section class="forecast-section">
+        <h2 id="forecast-title">Mock 7-day forecast</h2>
+        <p id="forecast-note">For each region we use a mock 7-day forecast (temperature, humidity, rain probability) to
+          calculate ETCL.</p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th id="th-day">Day</th>
+                <th id="th-temp">Temp (°C)</th>
+                <th id="th-humidity">Humidity (%)</th>
+                <th id="th-rain">Rain probability (%)</th>
+              </tr>
+            </thead>
+            <tbody id="forecastBody">
+              <!-- Rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p id="footer-text">© 2025 HarvestGuard. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script src="risk.js"></script>
+</body>
+
+</html>
