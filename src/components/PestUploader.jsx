@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { identifyPest } from "../services/geminiService.js";
 
 const PestUploader = ({ setLoading, setResult }) => {
   const [file, setFile] = useState(null);
@@ -13,16 +14,19 @@ const PestUploader = ({ setLoading, setResult }) => {
 
   const submit = async () => {
     if (!file) return;
-    setLoading(true);
-    const form = new FormData();
-    form.append("image", file);
-    const resp = await fetch("/api/identify", {
-      method: "POST",
-      body: form,
-    });
-    const data = await resp.json();
-    setResult(data);
-    setLoading(false);
+    setLoading(true); // Parent loader
+    setLoading2(true); // Local loader (if needed)
+
+    try {
+      const data = await identifyPest(file);
+      setResult(data);
+    } catch (error) {
+      console.error("Analysis failed", error);
+      alert("Analysis failed. Please try again.");
+    } finally {
+      setLoading(false);
+      setLoading2(false);
+    }
   };
 
   return (

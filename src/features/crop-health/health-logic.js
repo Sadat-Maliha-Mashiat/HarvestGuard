@@ -1,4 +1,4 @@
-import { identifyPest } from "../../services/geminiService";
+import { identifyPest } from "../../services/geminiService.js";
 
 // --- State Variables ---
 let currentFile = null;
@@ -21,6 +21,7 @@ const components = {
 };
 
 // --- Initialization ---
+// Since this is a module script, it runs deferred. We can assume DOM is ready or almost ready.
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     initGlobal();

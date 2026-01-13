@@ -10,6 +10,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Header: sticky navbar and background */
@@ -93,7 +94,6 @@ body {
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url('../../../public/assets/images/BG.jpg') no-repeat center/cover;
-  background-size: 100% auto;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -330,6 +330,20 @@ body {
 
 /* Mobile Optimization */
 @media (max-width: 600px) {
+  .hero {
+    height: auto;
+    min-height: 80vh;
+    background-attachment: scroll;
+  }
+
+  .features,
+  .how-it-works,
+  .why-different,
+  .dashboard-preview,
+  .faq {
+    padding: 20px 10px;
+  }
+
   .cta-button {
     font-size: 1.2rem;
     padding: 0.8rem 1.5rem;

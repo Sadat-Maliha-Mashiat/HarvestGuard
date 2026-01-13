@@ -7,11 +7,9 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #267e49, #74b870); /* Green gradient */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background: linear-gradient(to bottom, #267e49, #74b870);
+    /* Green gradient */
+    min-height: 100vh;
 }
 
 .container {
@@ -64,7 +62,24 @@ img {
     font-weight: bold;
 }
 
-#headline, #description, #resultHeading {
+#headline,
+#description,
+#resultHeading {
     font-size: 1.5rem;
     margin-bottom: 15px;
+}
+
+.health-app-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: transparent;
+    box-shadow: none;
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    .health-app-container {
+        margin: 0.5rem auto;
+        padding: 0.5rem;
+    }
 }
