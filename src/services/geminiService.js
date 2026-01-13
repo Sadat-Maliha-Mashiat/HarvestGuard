@@ -24,7 +24,7 @@ export async function identifyPest(imageFile) {
     // Configure model with tools
     // We use gemini-1.5-flash for speed and efficiency, or gemini-1.5-pro for deeper reasoning
     const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-1.5-flash-001",
         tools: [
             {
                 googleSearchRetrieval: {
