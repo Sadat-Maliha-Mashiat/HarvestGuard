@@ -11,7 +11,7 @@ HarvestGuard is a HackFest project developed at East Delta University under the 
 - Risk alerts & local risk visualization
 
 # Tech Stack
-- Frontend: HTML, CSS, JavaScript
+- Frontend: HTML, CSS, JavaScript, React.js
 - Storage: LocalStorage (offline-first)
 - APIs: Free Weather API
 - UI: Mobile-first, Bangla-first
