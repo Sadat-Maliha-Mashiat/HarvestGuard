@@ -22,4 +22,4 @@ HarvestGuard is a HackFest project developed at East Delta University under the 
 - Jaima Wajiha
 
 # 🔗 Project Link: 
-harvest-guard-six.vercel.app/
+https://harvest-guard-six.vercel.app/
