@@ -16,7 +16,7 @@ HarvestGuard is a HackFest project developed at East Delta University under the 
 - APIs: Free Weather API
 - UI: Mobile-first, Bangla-first
 
-# Team
+# Team Members
 - Sadat Maliha Mashiat
 - Nusrat Mehazabin Meem
 - Jaima Wajiha
